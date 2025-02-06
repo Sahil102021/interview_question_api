@@ -3,6 +3,8 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const cors = require("cors");
+
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -16,6 +18,8 @@ mongoose.connect("mongodb+srv://sahilramani2021:sahil@cluster0.n0ton.mongodb.net
   .catch((err) => console.log(err.message));
 
 var app = express();
+
+app.use(cors()); // Allows frontend to access the API
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
