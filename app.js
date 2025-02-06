@@ -20,6 +20,8 @@ mongoose
       useUnifiedTopology: true,
       useFindAndModify: false,
       useCreateIndex: true,
+      socketTimeoutMS: 45000, // 45 seconds timeout for socket operations
+      connectTimeoutMS: 30000, // 30 seconds timeout for connection setup
     }
   )
   .then(() => console.log("Connected!"))
