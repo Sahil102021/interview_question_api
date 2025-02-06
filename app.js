@@ -5,7 +5,6 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
 
-
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var categoryRouter = require("./routes/category");
@@ -13,7 +12,16 @@ var iqRouter = require("./routes/iq");
 
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://sahilramani2021:sahil@cluster0.n0ton.mongodb.net/interviewQuestion")
+mongoose
+  .connect(
+    "mongodb+srv://sahilramani2021:sahil@cluster0.n0ton.mongodb.net/interviewQuestion",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    }
+  )
   .then(() => console.log("Connected!"))
   .catch((err) => console.log(err.message));
 
