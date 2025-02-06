@@ -18,10 +18,8 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-      socketTimeoutMS: 45000, // 45 seconds timeout for socket operations
-      connectTimeoutMS: 30000, // 30 seconds timeout for connection setup
+      socketTimeoutMS: 45000,
+      connectTimeoutMS: 30000,
     }
   )
   .then(() => console.log("Connected!"))
