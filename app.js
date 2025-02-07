@@ -11,10 +11,10 @@ var categoryRouter = require("./routes/category");
 var iqRouter = require("./routes/iq");
 
 const mongoose = require("mongoose");
-
+let MONGODB_CONECT_URL = "mongodb+srv://sahilramani2021:sahil@cluster0.n0ton.mongodb.net/interviewQuestion";
 mongoose
   .connect(
-    "mongodb+srv://sahilramani2021:sahil@cluster0.n0ton.mongodb.net/interviewQuestion",
+    MONGODB_CONECT_URL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

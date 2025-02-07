@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let userSchema = new Schema({
-    fristname : {
+    firstname : {
         type : String,
         trim : true,
     },
