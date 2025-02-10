@@ -1,33 +1,18 @@
-const IQ = require("../model/iq");
-let cloudinary = require('../utiles/cloudinary')
+const CATEGORY = require("../model/category");
+
 exports.Create = async function (req, res) {
   try {
-    let { question, answer, photos } = req.body;
+    let { name, description } = req.body;
 
-    console.log(req.files); 
-    
-    if (!question || !answer)
-      throw new Error("Please provide question, answer, or photos!");
+    if (!name) throw new Error('Please provide category name');
 
-    // Map through the files and upload each one to Cloudinary
-    let photosPath = req.files.map((el) => el.path); 
-
-    const uploadPromises = photosPath.map(async (filePath) => {
-      const uploadResponse = await cloudinary.uploader.upload(filePath);
-      return uploadResponse.secure_url; // Return the Cloudinary URL
-    });
-
-    const photoUrls = await Promise.all(uploadPromises);
-
-    // Store the Cloudinary URLs in the request body
-    req.body.photos = photoUrls;
-
-    let IQData = await IQ.create(req.body);
+    req.body.user = req.user;
+    let categoryData = await CATEGORY.create(req.body);
 
     res.status(201).json({
       status: "Success",
-      message: "Successfully created interview Question",
-      data: IQData,
+      message: "Successfully created category",
+      data: categoryData,
     });
   } catch (error) {
     res.status(500).json({
