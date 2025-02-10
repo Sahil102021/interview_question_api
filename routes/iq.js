@@ -25,6 +25,8 @@ router.get('/', userController.Secure , iqController.Read  );
 router.get('/search', userController.Secure , iqController.Search  );
 router.delete('/delete/:id', userController.Secure , iqController.Delete );
 router.patch('/update/:id', userController.Secure ,upload.array('photos',5), iqController.Update );
+router.get('/read', iqController.Read  );
+
 
 
 module.exports = router;
