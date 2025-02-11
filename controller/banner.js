@@ -5,7 +5,7 @@ exports.Create = async function (req, res) {
   try {
     let { name, image, title , date , registered  } = req.body;
     // console.log('hello');
-    console.log(req.file);
+    // console.log(req.file);
 
     if (!title || !name)
       throw new Error("Please name or title, !");
@@ -14,7 +14,7 @@ exports.Create = async function (req, res) {
 
     let imagePath = await cloudinary.uploader.upload(req.file?.path);
     req.body.image  = imagePath.secure_url;
-    console.log(imagePath);
+    // console.log(imagePath);
     let BannerData = await BANNER.create(req.body);
 
     res.status(201).json({
@@ -53,7 +53,7 @@ exports.Delete = async function(req , res ,next) {
     try {
       let id1 = req.params.id ;
       let BannerData = await BANNER.findByIdAndDelete(id1);
-      console.log(BannerData);
+      // console.log(BannerData);
       res.status(201).json({
         status: "Success",
         message: "Successfully Delete  Banner",
@@ -75,9 +75,9 @@ exports.Update = async function(req, res, next) {
       let id1 = req.params.id;
       let imagePath = await cloudinary.uploader.upload(req.file.path);
       req.body.image  = imagePath.secure_url;
-      console.log(imagePath);
+      // console.log(imagePath);
       let BannerData = await BANNER.findByIdAndUpdate(id1, req.body, {new: true});
-      console.log(BannerData);
+      // console.log(BannerData);
       res.status(201).json({
         data: BannerData,
         status: "Success",
