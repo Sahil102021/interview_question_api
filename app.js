@@ -9,6 +9,8 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var categoryRouter = require("./routes/category");
 var iqRouter = require("./routes/iq");
+var bannerRouter = require("./routes/banner");
+
 
 const mongoose = require("mongoose");
 let MONGODB_CONECT_URL = "mongodb+srv://sahilramani2021:sahil@cluster0.n0ton.mongodb.net/interviewQuestion";
@@ -43,6 +45,8 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/category", categoryRouter);
 app.use("/iq", iqRouter);
+app.use("/banner", bannerRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
