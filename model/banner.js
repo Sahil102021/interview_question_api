@@ -31,5 +31,5 @@ const BannerSchema = new Schema({
     }
 }, { timestamps: true });
 
-const Category = mongoose.model('banners', BannerSchema);
-module.exports = Category;
+const BANNER = mongoose.model('banners', BannerSchema);
+module.exports = BANNER;
