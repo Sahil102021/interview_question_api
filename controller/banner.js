@@ -12,7 +12,7 @@ exports.Create = async function (req, res) {
 
     // Map through the files and upload each one to Cloudinary
 
-    let imagePath = await cloudinary.uploader.upload(req.file.path);
+    let imagePath = await cloudinary.uploader.upload(req.file?.path);
     req.body.image  = imagePath.secure_url;
     console.log(imagePath);
     let BannerData = await BANNER.create(req.body);
