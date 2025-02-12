@@ -11,7 +11,7 @@ let IqSchema = new Schema({
     trim: true,
   },
   photos: {
-    type: [String],
+    type: String,
   },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,

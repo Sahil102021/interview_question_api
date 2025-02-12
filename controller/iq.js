@@ -1,23 +1,18 @@
 const IQ = require("../model/iq");
-let cloudinary = require('../utiles/cloudinary')
+let cloudinary = require("../utiles/cloudinary");
 exports.Create = async function (req, res) {
   try {
     let { question, answer, photos } = req.body;
 
-    console.log(req.files); 
-    
+    console.log(req.file);
+
     if (!question || !answer)
       throw new Error("Please provide question, answer, or photos!");
 
     // Map through the files and upload each one to Cloudinary
-    let photosPath = req.files.map((el) => el.path); 
 
-    const uploadPromises = photosPath.map(async (filePath) => {
-      const uploadResponse = await cloudinary.uploader.upload(filePath);
-      return uploadResponse.secure_url; // Return the Cloudinary URL
-    });
-
-    const photoUrls = await Promise.all(uploadPromises);
+    const uploadResponse = await cloudinary.uploader.upload(req.file?.path);
+    const photoUrls = uploadResponse.secure_url; // Return the Cloudinary URL
 
     // Store the Cloudinary URLs in the request body
     req.body.photos = photoUrls;
@@ -52,7 +47,6 @@ exports.Read = async function (req, res) {
   }
 };
 
-
 exports.Search = async function (req, res, next) {
   try {
     //let searchQuery = req.query.Search ? req.query.Search.trim() : ""; // Trim input
@@ -86,7 +80,6 @@ exports.Search = async function (req, res, next) {
     });
   }
 };
-
 
 exports.Delete = async function (req, res, next) {
   try {

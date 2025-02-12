@@ -20,11 +20,11 @@ const storage = multer.diskStorage({
 
 
 /* GET users listing. */
-router.post('/', userController.Secure ,upload.array('photos',5), iqController.Create  );
+router.post('/', userController.Secure ,upload.single('photos'), iqController.Create  );
 router.get('/', userController.Secure , iqController.Read  );
 router.get('/search', userController.Secure , iqController.Search  );
 router.delete('/delete/:id', userController.Secure , iqController.Delete );
-router.patch('/update/:id', userController.Secure ,upload.array('photos',5), iqController.Update );
+router.patch('/update/:id', userController.Secure ,upload.single('photos'), iqController.Update );
 router.get('/read', iqController.Read  );
 
 
