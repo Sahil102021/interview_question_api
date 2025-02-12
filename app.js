@@ -14,6 +14,7 @@ var bannerRouter = require("./routes/banner");
 
 const mongoose = require("mongoose");
 let MONGODB_CONECT_URL = "mongodb+srv://sahilramani2021:sahil@cluster0.n0ton.mongodb.net/interviewQuestion";
+
 mongoose
   .connect(
     MONGODB_CONECT_URL,

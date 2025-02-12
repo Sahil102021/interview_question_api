@@ -4,18 +4,21 @@ exports.Create = async function (req, res) {
   try {
     let { question, answer, photos } = req.body;
 
-    console.log(req.file);
+    // console.log(req.file);
 
-    if (!question || !answer)
-      throw new Error("Please provide question, answer, or photos!");
+    if (!question || !answer) {
+      throw new Error("Please provide question and answer!");
+    }
 
-    // Map through the files and upload each one to Cloudinary
+    // Check if photos exist in the request
+    if (req.file) {
+      const uploadResponse = await cloudinary.uploader.upload(req.file.path);
+      const photoUrls = uploadResponse.secure_url; 
 
-    const uploadResponse = await cloudinary.uploader.upload(req.file?.path);
-    const photoUrls = uploadResponse.secure_url; // Return the Cloudinary URL
-
-    // Store the Cloudinary URLs in the request body
-    req.body.photos = photoUrls;
+      req.body.photos = photoUrls;
+    } else {
+      req.body.photos = null;
+    }
 
     let IQData = await IQ.create(req.body);
 
@@ -25,12 +28,14 @@ exports.Create = async function (req, res) {
       data: IQData,
     });
   } catch (error) {
+    // Handle any errors that occur
     res.status(500).json({
       status: "Error",
       message: error.message,
     });
   }
 };
+
 exports.Read = async function (req, res) {
   try {
     let IqData = await IQ.find().populate("categoryId");
